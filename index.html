@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolyGlot - Live Translator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-language"></i>
+                <h1>PolyGlot</h1>
+            </div>
+            <p class="subtitle">Live AI-Powered Translator</p>
+        </header>
+
+        <!-- Settings Panel -->
+        <div class="settings-panel">
+            <div class="api-config">
+                <label for="api-key">OpenAI API Key:</label>
+                <input type="password" id="api-key" placeholder="Enter your OpenAI API key">
+                <button id="save-key" class="btn-secondary">Save</button>
+            </div>
+        </div>
+
+        <!-- Translation Interface -->
+        <div class="translation-container">
+            <!-- Source Language Section -->
+            <div class="language-section source-section">
+                <div class="language-header">
+                    <select id="source-language" class="language-select">
+                        <option value="auto">Auto Detect</option>
+                        <option value="en">English</option>
+                        <option value="vi">Vietnamese</option>
+                        <option value="ja">Japanese</option>
+                        <option value="de">German</option>
+                        <option value="zh">Chinese</option>
+                    </select>
+                    <div class="voice-controls">
+                        <button id="voice-input" class="btn-voice" title="Voice Input">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <button id="play-source" class="btn-voice" title="Play Source Text">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                </div>
+                <textarea 
+                    id="source-text" 
+                    class="text-area" 
+                    placeholder="Enter text to translate or click the microphone for voice input..."
+                    rows="8"
+                ></textarea>
+                <div class="text-info">
+                    <span id="source-char-count">0 characters</span>
+                    <span id="detected-language"></span>
+                </div>
+            </div>
+
+            <!-- Translation Arrow -->
+            <div class="translation-arrow">
+                <button id="swap-languages" class="btn-swap" title="Swap Languages">
+                    <i class="fas fa-exchange-alt"></i>
+                </button>
+            </div>
+
+            <!-- Target Language Section -->
+            <div class="language-section target-section">
+                <div class="language-header">
+                    <select id="target-language" class="language-select">
+                        <option value="en">English</option>
+                        <option value="vi">Vietnamese</option>
+                        <option value="ja">Japanese</option>
+                        <option value="de">German</option>
+                        <option value="zh">Chinese</option>
+                    </select>
+                    <div class="voice-controls">
+                        <button id="play-target" class="btn-voice" title="Play Translation">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button id="copy-translation" class="btn-voice" title="Copy Translation">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <textarea 
+                    id="target-text" 
+                    class="text-area" 
+                    placeholder="Translation will appear here..."
+                    rows="8"
+                    readonly
+                ></textarea>
+                <div class="text-info">
+                    <span id="target-char-count">0 characters</span>
+                    <div class="translation-status">
+                        <span id="translation-status"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <button id="translate-btn" class="btn-primary">
+                <i class="fas fa-language"></i>
+                Translate
+            </button>
+            <button id="clear-btn" class="btn-secondary">
+                <i class="fas fa-trash"></i>
+                Clear
+            </button>
+            <div class="live-translate-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="live-translate">
+                    <span class="slider"></span>
+                </label>
+                <span>Live Translation</span>
+            </div>
+        </div>
+
+        <!-- History Panel -->
+        <div class="history-panel">
+            <h3>Recent Translations</h3>
+            <div id="translation-history" class="history-list">
+                <p class="no-history">No translations yet</p>
+            </div>
+            <button id="clear-history" class="btn-secondary">Clear History</button>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Translating...</p>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
