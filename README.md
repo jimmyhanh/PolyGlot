@@ -2,7 +2,8 @@
 
 A modern, real-time translation application powered by OpenAI's GPT models, supporting both text and voice input with speech synthesis capabilities.
 
-![PolyGlot Demo](https://via.placeholder.com/800x400/667eea/ffffff?text=PolyGlot+Live+Translator)
+<img width="1349" height="918" alt="image" src="https://github.com/user-attachments/assets/aa65abec-f28a-491a-8005-8e5b955c374b" />
+
 
 ## 🌟 Features
 
