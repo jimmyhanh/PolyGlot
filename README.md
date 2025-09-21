@@ -28,7 +28,7 @@ A modern, responsive web application for real-time translation using OpenAI's GP
 ## 📁 Project Structure
 
 ```
-PolyGlot/
+/
 ├── index.html              # Main HTML file
 ├── main.js                 # Application entry point
 ├── package.json           # Dependencies and scripts
@@ -63,8 +63,8 @@ PolyGlot/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/jimmyhanh/PolyGlot.git
-   cd PolyGlot
+   git clone https://github.com/jimmyhanh/.git
+   cd 
    ```
 
 2. **Install dependencies**
@@ -126,38 +126,10 @@ The application uses a modular architecture with clear separation of concerns:
 - **EventManager** - Centralized event handling and keyboard shortcuts
 - **PerformanceUtils** - Performance optimizations and utilities
 
-### CSS Architecture
-
-Organized with CSS custom properties and component-based styling:
-
-- **variables.css** - Design tokens and CSS custom properties
-- **base.css** - Reset, typography, and common components
-- **Component-specific CSS** - Focused styling for each UI component
-- **responsive.css** - Mobile-first responsive design
-
 ## 🔧 Configuration
 
 ### Environment Variables
 The app uses localStorage for configuration. No server-side environment variables needed.
-
-### API Configuration
-- **OpenAI API Key**: Required for translation functionality  
-- **Model**: Uses GPT-3.5-turbo for optimal performance and cost
-- **Rate Limiting**: Built-in retry logic with exponential backoff
-
-## 🎨 Customization
-
-### Theming
-Modify CSS custom properties in `css/variables.css`:
-
-```css
-:root {
-  --primary-color: #667eea;
-  --accent-color: #ffd700;
-  --text-primary: #333;
-  /* ... more variables */
-}
-```
 
 ### Adding Languages
 Update the language maps in `TranslationEngine.js`:
@@ -170,13 +142,6 @@ this.languageNames = {
   // ... more languages
 };
 ```
-
-## 📱 Browser Support
-
-- Chrome/Edge 88+
-- Firefox 85+
-- Safari 14+
-- Mobile browsers with ES6+ support
 
 ### Required Browser APIs
 - Fetch API
@@ -238,15 +203,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Font Awesome for icons
 - Google Fonts for typography
 - Web Speech API for voice features
-
-## 📞 Support
-
-For support, please open an issue on GitHub or contact the development team.
-
----
-
-**Made with ❤️ by the PolyGlot Team**
-```
 
 A modern, real-time translation application powered by OpenAI's GPT models, supporting both text and voice input with speech synthesis capabilities.
 
