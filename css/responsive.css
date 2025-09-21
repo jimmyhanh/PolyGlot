@@ -1,0 +1,245 @@
+/* responsive.css - Responsive design and mobile optimizations */
+
+/* Mobile-first responsive design */
+
+/* Tablet styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .translation-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .translation-arrow {
+        margin-top: 0;
+        order: 2;
+    }
+    
+    .target-section {
+        order: 3;
+    }
+    
+    .btn-swap {
+        transform: rotate(90deg);
+    }
+    
+    .btn-swap:hover {
+        transform: rotate(270deg) scale(1.1);
+    }
+    
+    .control-panel {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .api-config {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .api-config input {
+        min-width: auto;
+    }
+    
+    .logo h1 {
+        font-size: 2rem;
+    }
+    
+    .logo i {
+        font-size: 2rem;
+    }
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .language-section {
+        padding: 15px;
+    }
+    
+    .text-area {
+        min-height: 150px;
+        font-size: 14px;
+        padding: 12px;
+    }
+    
+    .language-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+    
+    .voice-controls {
+        justify-content: center;
+    }
+    
+    .control-panel {
+        padding: 0 10px;
+    }
+    
+    .btn-primary, .btn-secondary {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
+    .settings-panel {
+        padding: 15px;
+    }
+    
+    .history-panel {
+        padding: 15px;
+    }
+    
+    .api-config {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .api-config input {
+        min-width: auto;
+        padding: 8px 12px;
+    }
+    
+    .logo h1 {
+        font-size: 1.8rem;
+    }
+    
+    .logo i {
+        font-size: 1.8rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .toast-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+    }
+    
+    .toast {
+        max-width: none;
+        font-size: 14px;
+    }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 320px) {
+    .container {
+        padding: 8px;
+    }
+    
+    .language-section {
+        padding: 12px;
+    }
+    
+    .btn-voice {
+        width: 36px;
+        height: 36px;
+        font-size: 12px;
+    }
+    
+    .btn-swap {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+    }
+    
+    .text-area {
+        min-height: 120px;
+        font-size: 13px;
+    }
+    
+    .logo h1 {
+        font-size: 1.6rem;
+    }
+    
+    .logo i {
+        font-size: 1.6rem;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+    .header {
+        margin-bottom: 15px;
+    }
+    
+    .logo h1 {
+        font-size: 1.8rem;
+    }
+    
+    .logo i {
+        font-size: 1.8rem;
+    }
+    
+    .text-area {
+        min-height: 100px;
+    }
+    
+    .settings-panel {
+        margin-bottom: 15px;
+    }
+    
+    .control-panel {
+        margin-bottom: 15px;
+    }
+    
+    .history-panel {
+        margin-bottom: 15px;
+    }
+    
+    .history-list {
+        max-height: 120px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .header,
+    .settings-panel,
+    .control-panel,
+    .voice-controls,
+    .history-panel,
+    .loading,
+    .toast-container {
+        display: none !important;
+    }
+    
+    .translation-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    
+    .translation-arrow {
+        display: none;
+    }
+    
+    .language-section {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .text-area {
+        border: 1px solid #ccc;
+        background: white;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .btn-voice,
+    .btn-swap {
+        /* Ensure crisp icons on retina displays */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}

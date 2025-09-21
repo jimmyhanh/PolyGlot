@@ -1,0 +1,42 @@
+{
+  "name": "polyglot-translator",
+  "version": "1.0.0",
+  "description": "Live AI-Powered Translator with OpenAI integration",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "npx http-server . -p 3000 -o",
+    "dev": "npx http-server . -p 3000 -o -c-1",
+    "lint": "npx eslint js/ main.js --ext .js",
+    "lint:fix": "npx eslint js/ main.js --ext .js --fix",
+    "format": "npx prettier --write \"**/*.{js,css,html,md}\"",
+    "format:check": "npx prettier --check \"**/*.{js,css,html,md}\"",
+    "validate": "npm run lint && npm run format:check",
+    "build": "npm run validate && echo 'Build completed successfully'",
+    "clean": "echo 'Cleaning temporary files...' && rm -rf node_modules/.cache 2>/dev/null || true"
+  },
+  "keywords": [
+    "translator",
+    "ai",
+    "openai",
+    "speech-recognition",
+    "text-to-speech",
+    "multilingual",
+    "web-app"
+  ],
+  "author": "jimmyhanh",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "^3.0.0",
+    "http-server": "^14.1.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

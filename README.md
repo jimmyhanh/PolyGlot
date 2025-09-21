@@ -1,5 +1,253 @@
 # PolyGlot - Live AI-Powered Translator
 
+A modern, responsive web application for real-time translation using OpenAI's GPT models. Features voice recognition, text-to-speech, and a clean modular architecture.
+
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
+![Node](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen.svg)
+
+## ✨ Features
+
+- 🌍 **Multi-language Support** - Auto-detect source language or choose from supported languages
+- 🎤 **Voice Recognition** - Speech-to-text input with browser API
+- 🔊 **Text-to-Speech** - Listen to translations with natural voices
+- 📱 **Responsive Design** - Mobile-first design that works on all devices
+- 💾 **History Management** - Keep track of recent translations
+- ⚡ **Live Translation** - Real-time translation as you type
+- 🎨 **Modern UI** - Clean, intuitive interface with smooth animations  
+- 🔧 **Modular Architecture** - Well-organized, maintainable codebase
+- 🚀 **Performance Optimized** - Fast loading with lazy loading and caching
+
+## 🛠 Technology Stack
+
+- **Frontend**: Vanilla JavaScript (ES6+), CSS3, HTML5
+- **API**: OpenAI GPT-3.5-turbo
+- **Build Tools**: ESLint, Prettier, http-server
+- **Browser APIs**: Web Speech API, Speech Synthesis API, localStorage
+
+## 📁 Project Structure
+
+```
+PolyGlot/
+├── index.html              # Main HTML file
+├── main.js                 # Application entry point
+├── package.json           # Dependencies and scripts
+├── css/                   # Modular CSS files
+│   ├── variables.css      # CSS custom properties
+│   ├── base.css          # Reset & fundamental styles
+│   ├── header.css        # Header & branding
+│   ├── translation-container.css  # Main interface
+│   ├── controls.css      # Control panel & interactive elements
+│   ├── history.css       # Translation history
+│   ├── notifications.css # Toast notifications
+│   └── responsive.css    # Mobile optimizations
+├── js/                   # JavaScript modules
+│   ├── ApiManager.js     # OpenAI API integration
+│   ├── VoiceController.js # Speech recognition & synthesis
+│   ├── TranslationEngine.js # Core translation logic
+│   ├── HistoryManager.js # Translation history
+│   ├── UIController.js   # UI interactions & notifications
+│   ├── EventManager.js   # Event handling & shortcuts
+│   └── PerformanceUtils.js # Performance optimizations
+└── original/             # Backup of original files
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js >= 16.0.0
+- OpenAI API key
+- Modern web browser with ES6+ support
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/jimmyhanh/PolyGlot.git
+   cd PolyGlot
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm start
+   ```
+
+4. **Open your browser**
+   Navigate to `http://localhost:3000`
+
+5. **Configure your API key**
+   - Enter your OpenAI API key in the settings panel
+   - The key is stored securely in localStorage
+
+### Available Scripts
+
+- `npm start` - Start development server
+- `npm run dev` - Start with auto-reload (no cache)
+- `npm run lint` - Check code quality
+- `npm run lint:fix` - Fix linting issues automatically
+- `npm run format` - Format code with Prettier
+- `npm run validate` - Run linting and format checks
+- `npm run build` - Validate and build for production
+
+## 🌟 Usage
+
+### Basic Translation
+1. Enter your OpenAI API key in the settings panel
+2. Type or paste text in the source language box
+3. Select source and target languages
+4. Click "Translate" or enable live translation
+
+### Voice Features
+- 🎤 **Voice Input**: Click the microphone to speak your text
+- 🔊 **Text-to-Speech**: Click the play button to hear translations
+- 🔄 **Language Swap**: Click the swap arrow to reverse languages
+
+### Keyboard Shortcuts
+- `Ctrl/Cmd + Enter` - Translate text
+- `Ctrl/Cmd + K` - Clear all text
+- `Ctrl/Cmd + M` - Toggle voice input
+
+## 🏗 Architecture
+
+### Modular JavaScript Design
+
+The application uses a modular architecture with clear separation of concerns:
+
+- **ApiManager** - Handles all OpenAI API communication with retry logic
+- **VoiceController** - Manages speech recognition and text-to-speech
+- **TranslationEngine** - Core translation logic and language management
+- **HistoryManager** - Persistent storage and retrieval of translations
+- **UIController** - UI state management and user interactions
+- **EventManager** - Centralized event handling and keyboard shortcuts
+- **PerformanceUtils** - Performance optimizations and utilities
+
+### CSS Architecture
+
+Organized with CSS custom properties and component-based styling:
+
+- **variables.css** - Design tokens and CSS custom properties
+- **base.css** - Reset, typography, and common components
+- **Component-specific CSS** - Focused styling for each UI component
+- **responsive.css** - Mobile-first responsive design
+
+## 🔧 Configuration
+
+### Environment Variables
+The app uses localStorage for configuration. No server-side environment variables needed.
+
+### API Configuration
+- **OpenAI API Key**: Required for translation functionality  
+- **Model**: Uses GPT-3.5-turbo for optimal performance and cost
+- **Rate Limiting**: Built-in retry logic with exponential backoff
+
+## 🎨 Customization
+
+### Theming
+Modify CSS custom properties in `css/variables.css`:
+
+```css
+:root {
+  --primary-color: #667eea;
+  --accent-color: #ffd700;
+  --text-primary: #333;
+  /* ... more variables */
+}
+```
+
+### Adding Languages
+Update the language maps in `TranslationEngine.js`:
+
+```javascript
+this.languageNames = {
+  'auto': 'Auto Detect',
+  'en': 'English',
+  'es': 'Spanish', // Add new language
+  // ... more languages
+};
+```
+
+## 📱 Browser Support
+
+- Chrome/Edge 88+
+- Firefox 85+
+- Safari 14+
+- Mobile browsers with ES6+ support
+
+### Required Browser APIs
+- Fetch API
+- ES6 Modules
+- CSS Custom Properties
+- Web Speech API (optional, for voice features)
+
+## 🚀 Performance Features
+
+- **Lazy Loading** - Resources loaded on demand
+- **Debounced Translation** - Prevents excessive API calls
+- **Memory Management** - Efficient event listener cleanup
+- **Optimized Animations** - Respects user motion preferences
+- **Caching** - Service worker for offline functionality
+
+## 🔒 Security & Privacy
+
+- API keys stored locally in browser
+- No server-side data storage
+- HTTPS required for voice features
+- Input validation and sanitization
+- Rate limiting and retry logic
+
+## 🧪 Development
+
+### Code Quality
+- **ESLint** - Code linting with recommended rules
+- **Prettier** - Consistent code formatting
+- **JSDoc** - Comprehensive code documentation
+- **Error Boundaries** - Robust error handling
+
+### Testing the Application
+1. Test with different languages and text lengths
+2. Verify voice recognition works in supported browsers
+3. Test responsive design on various screen sizes
+4. Validate offline functionality with service worker
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+### Development Guidelines
+- Follow the existing code style
+- Add JSDoc comments for new functions
+- Update tests for new features
+- Ensure responsive design compatibility
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- OpenAI for the GPT API
+- Font Awesome for icons
+- Google Fonts for typography
+- Web Speech API for voice features
+
+## 📞 Support
+
+For support, please open an issue on GitHub or contact the development team.
+
+---
+
+**Made with ❤️ by the PolyGlot Team**
+```
+
 A modern, real-time translation application powered by OpenAI's GPT models, supporting both text and voice input with speech synthesis capabilities.
 
 <img width="1349" height="918" alt="image" src="https://github.com/user-attachments/assets/aa65abec-f28a-491a-8005-8e5b955c374b" />

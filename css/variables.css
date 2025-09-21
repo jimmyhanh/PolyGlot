@@ -1,0 +1,88 @@
+/* variables.css - CSS custom properties for consistent theming */
+
+:root {
+  /* Color palette */
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --primary-color: #667eea;
+  --primary-hover: #5a6fd8;
+  --accent-color: #ffd700;
+  --error-color: #e74c3c;
+  --success-color: #27ae60;
+  --warning-color: #f39c12;
+  --info-color: #3498db;
+  
+  /* Text colors */
+  --text-primary: #333;
+  --text-secondary: #666;
+  --text-muted: #999;
+  --text-white: #fff;
+  
+  /* Background colors */
+  --bg-white: #fff;
+  --bg-light: rgba(255, 255, 255, 0.95);
+  --bg-overlay: rgba(0, 0, 0, 0.5);
+  --bg-hover: #f8f9fa;
+  
+  /* Border colors */
+  --border-light: #e1e5e9;
+  --border-focus: var(--primary-color);
+  
+  /* Spacing */
+  --spacing-xs: 5px;
+  --spacing-sm: 10px;
+  --spacing-md: 15px;
+  --spacing-lg: 20px;
+  --spacing-xl: 25px;
+  --spacing-xxl: 30px;
+  
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 15px;
+  --radius-circle: 50%;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.4s ease;
+  
+  /* Shadows */
+  --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.15);
+  --shadow-button: 0 4px 15px rgba(102, 126, 234, 0.4);
+  --shadow-button-hover: 0 6px 20px rgba(102, 126, 234, 0.6);
+  
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 1.1rem;
+  --font-size-xl: 2rem;
+  --font-size-xxl: 2.5rem;
+  
+  /* Z-index levels */
+  --z-loading: 1000;
+  --z-toast: 1001;
+  --z-modal: 1002;
+  
+  /* Container sizes */
+  --container-max-width: 1200px;
+  --input-height: 40px;
+  --button-height: 44px;
+  --voice-button-size: 40px;
+  --swap-button-size: 50px;
+}
+
+/* Dark mode support (future enhancement) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --text-muted: #888;
+    --bg-light: rgba(30, 30, 30, 0.95);
+    --bg-hover: #2a2a2a;
+    --border-light: #444;
+  }
+}
