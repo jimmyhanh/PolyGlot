@@ -1,157 +1,198 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PolyGlot - Live Translator</title>
-    <!-- Modular CSS imports -->
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/translation-container.css">
-    <link rel="stylesheet" href="css/controls.css">
-    <link rel="stylesheet" href="css/history.css">
-    <link rel="stylesheet" href="css/notifications.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <!-- External resources -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="logo">
-                <i class="fas fa-language"></i>
-                <h1>PolyGlot</h1>
-            </div>
-            <p class="subtitle">Live AI-Powered Translator</p>
-        </header>
-
-        <!-- Settings Panel -->
-        <div class="settings-panel">
-            <div class="api-config">
-                <label for="api-key">OpenAI API Key:</label>
-                <input type="password" id="api-key" placeholder="Enter your OpenAI API key">
-                <button id="save-key" class="btn-secondary">Save</button>
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="PolyGlot translates everyday conversations with context, tone and AI refinement."
+    />
+    <title>PolyGlot · Live AI Translator</title>
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <a class="skip" href="#source-text">Skip to translator</a>
+    <main class="container">
+      <header>
+        <div>
+          <p class="eyebrow">CS4680 · AI ASSISTANT PROJECT</p>
+          <h1>PolyGlot<span>↔</span></h1>
+          <p class="subtitle">Your words. A world of understanding.</p>
         </div>
-
-        <!-- Translation Interface -->
-        <div class="translation-container">
-            <!-- Source Language Section -->
-            <div class="language-section source-section">
-                <div class="language-header">
-                    <select id="source-language" class="language-select">
-                        <option value="auto">Auto Detect</option>
-                        <option value="en">English</option>
-                        <option value="vi">Vietnamese</option>
-                        <option value="ja">Japanese</option>
-                        <option value="de">German</option>
-                        <option value="zh">Chinese</option>
-                    </select>
-                    <div class="voice-controls">
-                        <button id="voice-input" class="btn-voice" title="Voice Input">
-                            <i class="fas fa-microphone"></i>
-                        </button>
-                        <button id="play-source" class="btn-voice" title="Play Source Text">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                </div>
-                <textarea 
-                    id="source-text" 
-                    class="text-area" 
-                    placeholder="Enter text to translate or click the microphone for voice input..."
-                    rows="8"
-                ></textarea>
-                <div class="text-info">
-                    <span id="source-char-count">0 characters</span>
-                    <span id="detected-language"></span>
-                </div>
-            </div>
-
-            <!-- Translation Arrow -->
-            <div class="translation-arrow">
-                <button id="swap-languages" class="btn-swap" title="Swap Languages">
-                    <i class="fas fa-exchange-alt"></i>
-                </button>
-            </div>
-
-            <!-- Target Language Section -->
-            <div class="language-section target-section">
-                <div class="language-header">
-                    <select id="target-language" class="language-select">
-                        <option value="en">English</option>
-                        <option value="vi">Vietnamese</option>
-                        <option value="ja">Japanese</option>
-                        <option value="de">German</option>
-                        <option value="zh">Chinese</option>
-                    </select>
-                    <div class="voice-controls">
-                        <button id="play-target" class="btn-voice" title="Play Translation">
-                            <i class="fas fa-play"></i>
-                        </button>
-                        <button id="copy-translation" class="btn-voice" title="Copy Translation">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-                <textarea 
-                    id="target-text" 
-                    class="text-area" 
-                    placeholder="Translation will appear here..."
-                    rows="8"
-                    readonly
-                ></textarea>
-                <div class="text-info">
-                    <span id="target-char-count">0 characters</span>
-                    <div class="translation-status">
-                        <span id="translation-status"></span>
-                    </div>
-                </div>
-            </div>
+        <span class="badge">Live AI translator</span>
+      </header>
+      <details class="connection" id="connection-panel">
+        <summary>
+          Connection settings <span id="connection-status" role="status">Checking connection…</span>
+        </summary>
+        <p id="connection-help">Use the local server to keep your API key out of the browser.</p>
+        <form id="connection-form">
+          <label for="credential" id="credential-label">Personal API key (memory only)</label>
+          <div class="row">
+            <input
+              id="credential"
+              type="password"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="Enter key or server access token"
+            /><button type="submit">Use for this session</button
+            ><button type="button" id="forget-key">Forget</button>
+          </div>
+        </form>
+      </details>
+      <section class="workspace" aria-label="Translator">
+        <div class="workspace-heading">
+          <div>
+            <h2>Make yourself understood.</h2>
+            <p>Type or speak, choose your tone, then refine the details.</p>
+          </div>
+          <label class="toggle"
+            ><input type="checkbox" id="live-translate" /> Translate as I type</label
+          >
         </div>
-
-        <!-- Control Panel -->
-        <div class="control-panel">
-            <button id="translate-btn" class="btn-primary">
-                <i class="fas fa-language"></i>
-                Translate
-            </button>
-            <button id="clear-btn" class="btn-secondary">
-                <i class="fas fa-trash"></i>
-                Clear
-            </button>
-            <div class="live-translate-toggle">
-                <label class="switch">
-                    <input type="checkbox" id="live-translate">
-                    <span class="slider"></span>
-                </label>
-                <span>Live Translation</span>
+        <div class="options">
+          <label
+            >Conversation context<select id="context">
+              <option value="general">Everyday conversation</option>
+              <option value="travel">Travel & directions</option>
+              <option value="study">Study & learning</option>
+              <option value="work">Work & email</option>
+            </select></label
+          ><label
+            >Tone<select id="tone">
+              <option value="natural">Natural</option>
+              <option value="formal">Formal</option>
+              <option value="casual">Casual</option>
+            </select></label
+          >
+          <div class="examples">
+            <span>Try an example</span><button id="example-idiom">An idiom</button
+            ><button id="example-work">Work email</button>
+          </div>
+        </div>
+        <div class="translation-grid">
+          <div class="text-panel">
+            <div class="panel-heading">
+              <label for="source-language">From</label
+              ><select id="source-language" aria-label="Source language"></select
+              ><button id="voice-input" aria-pressed="false">Speak</button>
             </div>
-        </div>
-
-        <!-- History Panel -->
-        <div class="history-panel">
-            <h3>Recent Translations</h3>
-            <div id="translation-history" class="history-list">
-                <p class="no-history">No translations yet</p>
+            <label class="sr-only" for="source-text">Text to translate</label
+            ><textarea
+              id="source-text"
+              maxlength="4000"
+              placeholder="What would you like to say?"
+              rows="8"
+            ></textarea>
+            <div class="meta">
+              <span id="source-char-count">0 / 4,000</span><span id="detected-language"></span>
             </div>
-            <button id="clear-history" class="btn-secondary">Clear History</button>
+          </div>
+          <button
+            id="swap-languages"
+            class="swap"
+            aria-label="Swap languages and use the translation as source"
+          >
+            ⇄
+          </button>
+          <div class="text-panel output">
+            <div class="panel-heading">
+              <label for="target-language">To</label
+              ><select id="target-language" aria-label="Target language"></select
+              ><span class="ai-label">AI translation</span>
+            </div>
+            <label class="sr-only" for="target-text">Translated text</label
+            ><textarea
+              id="target-text"
+              placeholder="Your translation will appear here."
+              rows="8"
+              readonly
+            ></textarea>
+            <div class="meta">
+              <span id="result-meta">Ready when you are</span>
+              <div>
+                <button id="play-target" disabled>Listen</button
+                ><button id="copy-translation" disabled>Copy</button>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <!-- Loading Indicator -->
-        <div id="loading" class="loading hidden">
-            <div class="spinner"></div>
-            <p>Translating...</p>
+        <div class="actions">
+          <button class="primary" id="translate-btn">
+            Translate <span aria-hidden="true">↗</span></button
+          ><button id="refine-btn" disabled>Refine translation</button
+          ><button id="clear-btn">Clear</button
+          ><span id="translation-status" role="status" aria-live="polite"
+            >Enter text to get started.</span
+          >
         </div>
-
-        <!-- Toast Notifications -->
-        <div id="toast-container" class="toast-container"></div>
-    </div>
-
-    <!-- Modular JavaScript import -->
+        <div id="error" class="error" role="alert" hidden></div>
+        <div id="notes-panel" class="notes" hidden>
+          <h3>Translation notes</h3>
+          <p id="notes"></p>
+          <details id="comparison" hidden>
+            <summary>Compare with previous draft</summary>
+            <p id="previous-draft"></p>
+          </details>
+        </div>
+        <p class="privacy">
+          Text is sent to OpenAI for translation. Voice input may use your browser’s speech service.
+          AI translations can make mistakes; review important details. Live mode sends text after a
+          pause and uses API credits.
+        </p>
+      </section>
+      <section class="lower-grid">
+        <details class="patterns" open>
+          <summary>How the AI translates</summary>
+          <div class="pattern">
+            <span>01</span>
+            <div>
+              <h3>Persona</h3>
+              <p>
+                A professional interpreter role keeps the response faithful to your meaning, tone,
+                names and numbers.
+              </p>
+            </div>
+          </div>
+          <div class="pattern">
+            <span>02</span>
+            <div>
+              <h3>Few-shot examples</h3>
+              <p>
+                Examples show how to translate idioms, preserve facts and treat instructions inside
+                your text as content.
+              </p>
+            </div>
+          </div>
+          <div class="pattern">
+            <span>03</span>
+            <div>
+              <h3>Iterative refinement</h3>
+              <p>
+                “Refine translation” reviews the draft against your original and shows the previous
+                version for comparison.
+              </p>
+            </div>
+          </div>
+          <p id="patterns-used" class="small">Patterns are applied to real API requests.</p>
+        </details>
+        <section class="history">
+          <div class="history-heading">
+            <h2>Recent translations</h2>
+            <button id="clear-history">Clear history</button>
+          </div>
+          <label class="toggle"
+            ><input id="save-history" type="checkbox" /> Remember on this device</label
+          >
+          <p class="small">Off by default. History otherwise lasts only while this page is open.</p>
+          <div id="translation-history"></div>
+        </section>
+      </section>
+      <footer>
+        PolyGlot · Built for everyday conversations, travel and learning.<br />Keyboard: Ctrl / ⌘ +
+        Enter to translate. Voice support depends on your browser and installed voices.
+      </footer>
+    </main>
     <script type="module" src="main.js"></script>
-</body>
+  </body>
 </html>

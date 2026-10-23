@@ -1,470 +1,114 @@
-# PolyGlot - Live AI-Powered Translator
+# PolyGlot · Live AI Translator
 
-A modern, responsive web application for real-time translation using OpenAI's GPT models. Features voice recognition, text-to-speech, and a clean modular architecture.
+PolyGlot helps people communicate across languages when wording, tone and idioms matter. The CS4680 MVP combines typed or browser-transcribed speech with AI translation, context and tone controls, and a second-pass refinement action.
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
-![Node](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen.svg)
+- **Code:** https://github.com/jimmyhanh/PolyGlot
+- **GitHub Pages:** https://jimmyhanh.github.io/PolyGlot/
+- **Project report and rubric map:** [docs/CS4680_PROJECT_REPORT.md](docs/CS4680_PROJECT_REPORT.md)
+- **Presentation script and live-demo runbook:** [docs/PRESENTATION.md](docs/PRESENTATION.md)
+- **Evaluation cases:** [docs/EVALUATION.md](docs/EVALUATION.md)
 
-## ✨ Features
+## Recommended class setup
 
-- 🌍 **Multi-language Support** - Auto-detect source language or choose from supported languages
-- 🎤 **Voice Recognition** - Speech-to-text input with browser API
-- 🔊 **Text-to-Speech** - Listen to translations with natural voices
-- 📱 **Responsive Design** - Mobile-first design that works on all devices
-- 💾 **History Management** - Keep track of recent translations
-- ⚡ **Live Translation** - Real-time translation as you type
-- 🎨 **Modern UI** - Clean, intuitive interface with smooth animations  
-- 🔧 **Modular Architecture** - Well-organized, maintainable codebase
-- 🚀 **Performance Optimized** - Fast loading with lazy loading and caching
+Install **Node.js 22 or newer**, then:
 
-## 🛠 Technology Stack
-
-- **Frontend**: Vanilla JavaScript (ES6+), CSS3, HTML5
-- **API**: OpenAI GPT-3.5-turbo
-- **Build Tools**: ESLint, Prettier, http-server
-- **Browser APIs**: Web Speech API, Speech Synthesis API, localStorage
-
-## 📁 Project Structure
-
-```
-/
-├── index.html              # Main HTML file
-├── main.js                 # Application entry point
-├── package.json           # Dependencies and scripts
-├── css/                   # Modular CSS files
-│   ├── variables.css      # CSS custom properties
-│   ├── base.css          # Reset & fundamental styles
-│   ├── header.css        # Header & branding
-│   ├── translation-container.css  # Main interface
-│   ├── controls.css      # Control panel & interactive elements
-│   ├── history.css       # Translation history
-│   ├── notifications.css # Toast notifications
-│   └── responsive.css    # Mobile optimizations
-├── js/                   # JavaScript modules
-│   ├── ApiManager.js     # OpenAI API integration
-│   ├── VoiceController.js # Speech recognition & synthesis
-│   ├── TranslationEngine.js # Core translation logic
-│   ├── HistoryManager.js # Translation history
-│   ├── UIController.js   # UI interactions & notifications
-│   ├── EventManager.js   # Event handling & shortcuts
-│   └── PerformanceUtils.js # Performance optimizations
-└── original/             # Backup of original files
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Node.js >= 16.0.0
-- OpenAI API key
-- Modern web browser with ES6+ support
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/jimmyhanh/.git
-   cd 
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server**
-   ```bash
-   npm start
-   ```
-
-4. **Open your browser**
-   Navigate to `http://localhost:3000`
-
-5. **Configure your API key**
-   - Enter your OpenAI API key in the settings panel
-   - The key is stored securely in localStorage
-
-### Available Scripts
-
-- `npm start` - Start development server
-- `npm run dev` - Start with auto-reload (no cache)
-- `npm run lint` - Check code quality
-- `npm run lint:fix` - Fix linting issues automatically
-- `npm run format` - Format code with Prettier
-- `npm run validate` - Run linting and format checks
-- `npm run build` - Validate and build for production
-
-## 🌟 Usage
-
-### Basic Translation
-1. Enter your OpenAI API key in the settings panel
-2. Type or paste text in the source language box
-3. Select source and target languages
-4. Click "Translate" or enable live translation
-
-### Voice Features
-- 🎤 **Voice Input**: Click the microphone to speak your text
-- 🔊 **Text-to-Speech**: Click the play button to hear translations
-- 🔄 **Language Swap**: Click the swap arrow to reverse languages
-
-### Keyboard Shortcuts
-- `Ctrl/Cmd + Enter` - Translate text
-- `Ctrl/Cmd + K` - Clear all text
-- `Ctrl/Cmd + M` - Toggle voice input
-
-## 🏗 Architecture
-
-### Modular JavaScript Design
-
-The application uses a modular architecture with clear separation of concerns:
-
-- **ApiManager** - Handles all OpenAI API communication with retry logic
-- **VoiceController** - Manages speech recognition and text-to-speech
-- **TranslationEngine** - Core translation logic and language management
-- **HistoryManager** - Persistent storage and retrieval of translations
-- **UIController** - UI state management and user interactions
-- **EventManager** - Centralized event handling and keyboard shortcuts
-- **PerformanceUtils** - Performance optimizations and utilities
-
-## 🔧 Configuration
-
-### Environment Variables
-The app uses localStorage for configuration. No server-side environment variables needed.
-
-### Adding Languages
-Update the language maps in `TranslationEngine.js`:
-
-```javascript
-this.languageNames = {
-  'auto': 'Auto Detect',
-  'en': 'English',
-  'es': 'Spanish', // Add new language
-  // ... more languages
-};
+```bash
+git clone https://github.com/jimmyhanh/PolyGlot.git
+cd PolyGlot
+npm ci
 ```
 
-### Required Browser APIs
-- Fetch API
-- ES6 Modules
-- CSS Custom Properties
-- Web Speech API (optional, for voice features)
+Copy `.env.example` to `.env` using your editor, or:
 
-## 🚀 Performance Features
-
-- **Lazy Loading** - Resources loaded on demand
-- **Debounced Translation** - Prevents excessive API calls
-- **Memory Management** - Efficient event listener cleanup
-- **Optimized Animations** - Respects user motion preferences
-- **Caching** - Service worker for offline functionality
-
-## 🔒 Security & Privacy
-
-- API keys stored locally in browser
-- No server-side data storage
-- HTTPS required for voice features
-- Input validation and sanitization
-- Rate limiting and retry logic
-
-## 🧪 Development
-
-### Code Quality
-- **ESLint** - Code linting with recommended rules
-- **Prettier** - Consistent code formatting
-- **JSDoc** - Comprehensive code documentation
-- **Error Boundaries** - Robust error handling
-
-### Testing the Application
-1. Test with different languages and text lengths
-2. Verify voice recognition works in supported browsers
-3. Test responsive design on various screen sizes
-4. Validate offline functionality with service worker
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
-
-### Development Guidelines
-- Follow the existing code style
-- Add JSDoc comments for new functions
-- Update tests for new features
-- Ensure responsive design compatibility
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- OpenAI for the GPT API
-- Font Awesome for icons
-- Google Fonts for typography
-- Web Speech API for voice features
-
-A modern, real-time translation application powered by OpenAI's GPT models, supporting both text and voice input with speech synthesis capabilities.
-
-<img width="1349" height="918" alt="image" src="https://github.com/user-attachments/assets/aa65abec-f28a-491a-8005-8e5b955c374b" />
-
-
-## 🌟 Features
-
-### Core Translation Features
-- **Real-time Translation**: Translate text instantly as you type
-- **Voice Input**: Speak in any supported language using Web Speech API
-- **Text-to-Speech**: Listen to translations with natural voice synthesis
-- **Multi-language Support**: Vietnamese, English, Japanese, German, Chinese
-- **Auto Language Detection**: Automatically detect source language
-- **Bidirectional Translation**: Easy language swapping with one click
-
-### Advanced Features
-- **Live Translation Mode**: Toggle real-time translation as you type
-- **Translation History**: Keep track of recent translations
-- **Offline Storage**: API key and history stored locally
-- **Responsive Design**: Works perfectly on desktop, tablet, and mobile
-- **Keyboard Shortcuts**: Quick actions with keyboard shortcuts
-- **Copy to Clipboard**: Easy sharing of translations
-- **Modern UI**: Beautiful gradient design with smooth animations
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Modern web browser with JavaScript enabled
-- OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
-- Internet connection for API calls
-
-### Setup Instructions
-
-1. **Clone or Download**
-   ```bash
-   git clone https://github.com/yourusername/polyglot-translator.git
-   cd polyglot-translator
-   ```
-
-2. **Open the Application**
-   - Open `index.html` in your web browser
-   - Or serve it using a local web server:
-   ```bash
-   # Using Python
-   python -m http.server 8000
-   
-   # Using Node.js
-   npx serve .
-   
-   # Using PHP
-   php -S localhost:8000
-   ```
-
-3. **Configure API Key**
-   - Enter your OpenAI API key in the settings panel
-   - Click "Save" to store it locally
-   - Your key is stored securely in your browser's local storage
-
-4. **Start Translating!**
-   - Type text in the source language box
-   - Select source and target languages
-   - Click "Translate" or enable live translation
-   - Use voice input by clicking the microphone button
-
-## 🎮 How to Use
-
-### Basic Translation
-1. Enter text in the left text area
-2. Select source and target languages
-3. Click the "Translate" button
-4. View the translation in the right text area
-
-### Voice Input
-1. Click the microphone button (🎤)
-2. Speak clearly in your chosen language
-3. The speech will be converted to text automatically
-4. Translation happens instantly if live mode is enabled
-
-### Live Translation
-1. Toggle the "Live Translation" switch
-2. Start typing in the source text area
-3. Translation updates automatically after 1 second pause
-4. Perfect for real-time conversations
-
-### Text-to-Speech
-1. Click the play button (▶️) next to any text area
-2. Listen to the pronunciation in the selected language
-3. Supports all target languages with native voice synthesis
-
-## ⌨️ Keyboard Shortcuts
-
-- `Ctrl/Cmd + Enter`: Translate text
-- `Ctrl/Cmd + K`: Clear all text
-- `Ctrl/Cmd + M`: Toggle voice input
-- `Tab`: Navigate between elements
-- `Enter`: Save API key (when focused on key input)
-
-## 🌐 Supported Languages
-
-| Language | Code | Voice Input | Text-to-Speech |
-|----------|------|-------------|----------------|
-| English | `en` | ✅ | ✅ |
-| Vietnamese | `vi` | ✅ | ✅ |
-| Japanese | `ja` | ✅ | ✅ |
-| German | `de` | ✅ | ✅ |
-| Chinese | `zh` | ✅ | ✅ |
-
-## 🔧 Configuration
-
-### OpenAI API Setup
-1. Visit [OpenAI Platform](https://platform.openai.com/api-keys)
-2. Create an account or sign in
-3. Generate a new API key
-4. Copy the key and paste it in PolyGlot's settings
-5. Ensure you have sufficient API credits
-
-### Browser Permissions
-- **Microphone Access**: Required for voice input
-- **Local Storage**: Used to save API key and history
-- **Clipboard Access**: For copy translation feature
-
-## 📱 Mobile Support
-
-PolyGlot is fully responsive and optimized for mobile devices:
-- Touch-friendly interface
-- Adaptive layout for different screen sizes
-- Mobile-optimized voice input
-- Gesture support for common actions
-
-## 🔒 Privacy & Security
-
-- **API Key**: Stored locally in your browser, never sent to third parties
-- **Translation Data**: Sent only to OpenAI for processing
-- **No Server**: Runs entirely in your browser
-- **No Analytics**: No tracking or data collection
-- **Open Source**: Full transparency of code
-
-## 🛠️ Customization
-
-### Adding New Languages
-To add support for new languages, modify the `languageNames` object in `script.js`:
-
-```javascript
-this.languageNames = {
-    'auto': 'Auto Detect',
-    'en': 'English',
-    'vi': 'Vietnamese',
-    'ja': 'Japanese',
-    'de': 'German',
-    'zh': 'Chinese',
-    'fr': 'French', // Add new language
-    'es': 'Spanish'  // Add new language
-};
+```bash
+# macOS / Linux
+cp .env.example .env
+# Windows PowerShell
+Copy-Item .env.example .env
 ```
 
-Also update the HTML select options in `index.html`.
+Edit `.env` locally:
 
-### Styling Customization
-Modify `styles.css` to customize:
-- Color scheme (change CSS custom properties)
-- Layout and spacing
-- Animations and transitions
-- Mobile breakpoints
+```dotenv
+OPENAI_API_KEY=your_actual_api_key
+OPENAI_MODEL=gpt-4.1-mini
+HOST=127.0.0.1
+PORT=3000
+```
 
-## 🐛 Troubleshooting
+Run `npm start` and open **http://127.0.0.1:3000**. The connection panel should say **Server ready**. A successful translation verifies provider access; health status only confirms configuration. Keep `.env` out of commits. API usage requires provider access and credits independently of a ChatGPT subscription.
 
-### Common Issues
+## GitHub Pages option
 
-**Translation not working:**
-- Check your OpenAI API key
-- Verify internet connection
-- Check browser console for errors
-- Ensure you have API credits
+Pages serves static files and cannot read `.env` or run the Node server. Open Connection settings and enter **your own** OpenAI API key for a personal demo. The app keeps it in page memory only, clears the input after submission, and sends it directly to OpenAI. Refresh or **Forget** removes it. Browser scripts can still access a key during use, so use local-server mode for the classroom presentation and never put a shared production key in the page. The old `openai-api-key` localStorage entry is removed on startup.
 
-**Voice input not working:**
-- Allow microphone permissions
-- Check if using HTTPS (required for speech API)
-- Try different browsers (Chrome/Edge recommended)
+The old cache-first service worker is retired by `sw.js`. If a previous installation still shows the old UI, reload online or clear this site's service worker/cache in browser settings.
 
-**Text-to-speech not working:**
-- Check browser compatibility
-- Ensure audio is not muted
-- Try different languages
+## Features
 
-### Browser Compatibility
+- Eight selectable languages: English, Vietnamese, Japanese, German, Chinese, Spanish, French and Korean. Auto detection applies to typed text.
+- Natural, formal or casual tone; everyday, travel, study or work context.
+- **Persona + Few-shot examples** on every request. **Iterative refinement** when you click Refine translation, with the previous draft available for comparison.
+- Structured translation, detected-language code and brief notes in one API call.
+- Optional live translation after a one-second pause. This is request-based translation, not continuous audio streaming.
+- Voice input where browser speech recognition is available. Select the spoken language before pressing Speak.
+- Listen where a matching system voice is installed, copy output, swap languages, and load history with its original settings.
+- Session-only history by default. Remember on this device is opt-in, holds up to 20 entries, and can be cleared.
+- Responsive layout, visible keyboard focus, field labels, status/error announcements and system dark mode.
 
-| Feature | Chrome | Firefox | Safari | Edge |
-|---------|--------|---------|--------|------|
-| Basic Translation | ✅ | ✅ | ✅ | ✅ |
-| Voice Input | ✅ | ❌ | ✅ | ✅ |
-| Text-to-Speech | ✅ | ✅ | ✅ | ✅ |
-| Live Translation | ✅ | ✅ | ✅ | ✅ |
+## Prompt implementation
 
-## 📝 API Usage
+`js/prompts.js` is the shared prompt source used by the server and Pages client. Its system persona directs faithful translation; three user/assistant examples demonstrate idioms, factual preservation and instruction-as-data behavior. Refinement adds the original source and previous draft, asking the model to check omissions and wording. Brief notes explain relevant choices without requesting hidden reasoning.
 
-### OpenAI Model Used
-- **Model**: GPT-3.5-turbo
-- **Max Tokens**: 1000 per translation
-- **Temperature**: 0.3 (for consistent translations)
+Structured JSON improves application parsing, **not proof of translation accuracy**. Runtime checks reject missing, empty, refused or truncated results. Context and tone are controlled choices, while source text stays in a JSON user message. Prompt-injection resistance is an intended behavior that still needs adversarial evaluation.
 
-### Cost Estimation
-- Average cost: ~$0.002 per translation
-- 1000 translations ≈ $2.00
-- Voice input adds no extra cost
+## Architecture
 
-## 🤝 Contributing
+```text
+index.html + css/app.css + main.js
+  ApiManager -> local /api/translate OR direct personal-session API call
+  TranslationEngine -> cancellation and latest-request handling
+  HistoryManager -> session storage policy and optional localStorage
+  prompts.js -> validation, persona, examples, refinement, JSON contract
+server/app.js -> private API credentials, validation, rate limit, provider call
+```
 
-We welcome contributions! Here's how to get started:
+The earlier `script.js`, `styles.css`, files in `original/`, and unused older controller/CSS modules remain as historical reference. The current entry point is `main.js`; it imports only the four modules listed above. `MODULAR-STRUCTURE.md` and `OPTIMIZATION-SUMMARY.md` describe the earlier implementation, not the current runtime.
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+## Validation
 
-### Development Setup
-1. Clone the repository
-2. Make changes to HTML, CSS, or JavaScript files
-3. Test in multiple browsers
-4. Ensure mobile compatibility
+```bash
+npm test
+npm run lint
+npm run format:check
+npm run build
+```
 
-## 📄 License
+`build` runs checks; no bundling is necessary. Unit and HTTP tests use mocked provider responses, make no paid API calls, and cannot establish linguistic quality. See the evaluation document for live translation and device rehearsal cases.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Privacy and deployment limits
 
-## 🙏 Acknowledgments
+Text reaches OpenAI in both modes. Browser speech recognition may send audio to the browser vendor's service. Opting into history saves source text and translations on the device; avoid doing that on shared computers. No analytics or server conversation database is included.
 
-- **OpenAI** for providing the powerful GPT models
-- **Web Speech API** for voice recognition capabilities
-- **Font Awesome** for beautiful icons
-- **Google Fonts** for typography
-- **Contributors** who help improve PolyGlot
+The local server binds to loopback by default, serves only explicitly allowed assets, blocks cross-origin API requests, and limits each connected IP to 30 requests/minute. It times out provider calls and does not return raw provider errors. To bind a non-loopback `HOST`, set `POLYGLOT_ACCESS_TOKEN`, deploy behind HTTPS, and enter the token in the UI. The limiter is in-memory and uses the socket address, so it is not a substitute for user authentication, distributed limits or production abuse controls.
 
-## 📞 Support
+This is a class MVP. API access, latency, translation quality, microphone permissions and installed voices depend on the account/device/network. It offers no offline translation, certified interpretation, continuous simultaneous speech interpretation, user accounts or accuracy guarantee.
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/polyglot-translator/issues)
-- **Documentation**: This README file
-- **Email**: support@polyglot-translator.com
+## Troubleshooting
 
-## 🔄 Version History
+| Symptom                             | Action                                                                                                                             |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Server needs OPENAI_API_KEY         | Set it in `.env` in the repository root and restart `npm start`.                                                                   |
+| API access rejected                 | Check key validity and access to `OPENAI_MODEL`.                                                                                   |
+| Quota/rate limit                    | Check provider billing or wait before retrying. Disable live mode to reduce requests.                                              |
+| Pages asks for a key despite `.env` | Pages cannot run the server. Use local-server mode or your personal session key.                                                   |
+| Speech input unavailable            | Use a browser with speech recognition support, allow microphone access, and use HTTPS or localhost. Typed input remains available. |
+| No installed voice                  | Install a voice for the target language in device settings.                                                                        |
+| Invalid/incomplete output           | Retry with a shorter passage. Partial output is deliberately rejected.                                                             |
 
-### v1.0.0 (Current)
-- Initial release with full translation features
-- Voice input and text-to-speech support
-- Live translation mode
-- Multi-language support
-- Responsive design
-- Translation history
+## Documentation sources
 
-### Planned Features
-- [ ] Offline translation support
-- [ ] Document translation
-- [ ] Image text translation
-- [ ] Conversation mode
-- [ ] Translation quality rating
-- [ ] Custom voice selection
-- [ ] Dark/light theme toggle
-- [ ] Export translation history
+- [OpenAI structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs?api-mode=chat)
+- [GPT-4.1 mini model documentation](https://developers.openai.com/api/docs/models/gpt-4.1-mini)
 
----
-
-Made with ❤️ using OpenAI's GPT technology
-
-**Happy Translating!** 🌍
+The demo video is intentionally not included in this update. The supplied assignment still lists a video link as a submission item. Check Canvas for the deadline and any instructor-approved exception.
