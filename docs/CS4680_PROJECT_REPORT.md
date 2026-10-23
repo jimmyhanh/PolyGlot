@@ -60,7 +60,7 @@ A future hosted service would need account-based access, persistent quota enforc
 
 ## 6. Testing and presentation readiness
 
-Automated tests cover request validation, prompt composition, refinement payloads, response parsing, stale-request cancellation, history failures, server credential isolation, access controls, rate limits and provider failures. Provider responses in these tests are mocked. Browser test scenarios cover desktop/mobile flows and safe history rendering. The initial automated browser run could not start because the environment lacked Chromium and its download returned an invalid archive. This limitation is separate from the passing unit/HTTP suite.
+Automated tests cover request validation, prompt composition, refinement payloads, response parsing, stale-request cancellation, history failures, server credential isolation, access controls, rate limits and provider failures. Provider responses in these tests are mocked. Browser test scenarios cover desktop/mobile flows and safe history rendering. The initial automated browser run could not start because the environment lacked Chromium and its download returned an invalid archive. This limitation is separate from the passing unit/HTTP suite. A subsequent check of the public Pages interface caught cached legacy JavaScript loading with the new HTML. Versioned asset URLs now keep the HTML, entry point and imported modules aligned during upgrades.
 
 A real account/device rehearsal remains required: valid API credentials, a live translation, a refinement, microphone permissions and target-language playback. See `EVALUATION.md` for test cases and `PRESENTATION.md` for the rehearsal and live demonstration sequence. Do not label mocked checks as a successful live-model demo.
 

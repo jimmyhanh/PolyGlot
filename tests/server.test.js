@@ -103,3 +103,17 @@ test('untrusted host names cannot reach the unauthenticated local API', async t 
         403
     );
 });
+
+test('versioned browser assets resolve through the local server', async t => {
+    const { url } = await serve(t);
+    const html = await (await fetch(`${url}/`)).text();
+    assert.match(html, /main\.js\?v=2/);
+    for (const path of [
+        '/main.js?v=2',
+        '/js/ApiManager.js?v=2',
+        '/js/prompts.js?v=2',
+        '/css/app.css?v=2'
+    ]) {
+        assert.equal((await fetch(`${url}${path}`)).status, 200);
+    }
+});

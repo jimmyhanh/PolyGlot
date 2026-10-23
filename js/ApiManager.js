@@ -1,4 +1,4 @@
-import { DEFAULT_MODEL, requestBody, parseCompletion, providerError } from './prompts.js';
+import { DEFAULT_MODEL, requestBody, parseCompletion, providerError } from './prompts.js?v=2';
 export class ApiManager {
     constructor() {
         this.key = '';

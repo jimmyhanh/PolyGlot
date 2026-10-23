@@ -1,7 +1,7 @@
-import { ApiManager } from './js/ApiManager.js';
-import { TranslationEngine } from './js/TranslationEngine.js';
-import { HistoryManager } from './js/HistoryManager.js';
-import { LANGUAGES, PATTERNS } from './js/prompts.js';
+import { ApiManager } from './js/ApiManager.js?v=2';
+import { TranslationEngine } from './js/TranslationEngine.js?v=2';
+import { HistoryManager } from './js/HistoryManager.js?v=2';
+import { LANGUAGES, PATTERNS } from './js/prompts.js?v=2';
 const $ = id => document.getElementById(id);
 const api = new ApiManager();
 const engine = new TranslationEngine(api);
