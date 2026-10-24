@@ -107,7 +107,7 @@ test('untrusted host names cannot reach the unauthenticated local API', async t 
 test('versioned browser assets resolve through the local server', async t => {
     const { url } = await serve(t);
     const html = await (await fetch(`${url}/`)).text();
-    assert.match(html, /main\.js\?v=2/);
+    assert.match(html, /main\.js\?v=3/);
     for (const path of [
         '/main.js?v=2',
         '/js/ApiManager.js?v=2',

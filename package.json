@@ -7,9 +7,9 @@
   "scripts": {
     "start": "node --env-file-if-exists=.env server/start.js",
     "dev": "node --watch --env-file-if-exists=.env server/start.js",
-    "lint": "eslint main.js js/ApiManager.js js/TranslationEngine.js js/HistoryManager.js js/prompts.js server/ tests/ sw.js",
-    "format": "prettier --write main.js index.html css/app.css js/ApiManager.js js/TranslationEngine.js js/HistoryManager.js js/prompts.js server/ tests/ sw.js README.md docs/*.md",
-    "format:check": "prettier --check main.js index.html css/app.css js/ApiManager.js js/TranslationEngine.js js/HistoryManager.js js/prompts.js server/ tests/ sw.js README.md docs/*.md",
+    "lint": "eslint main.js js/ContinuousSpeech.js js/ApiManager.js js/TranslationEngine.js js/HistoryManager.js js/prompts.js server/ tests/ sw.js",
+    "format": "prettier --write main.js index.html css/app.css js/ContinuousSpeech.js js/ApiManager.js js/TranslationEngine.js js/HistoryManager.js js/prompts.js server/ tests/ sw.js README.md docs/*.md",
+    "format:check": "prettier --check main.js index.html css/app.css js/ContinuousSpeech.js js/ApiManager.js js/TranslationEngine.js js/HistoryManager.js js/prompts.js server/ tests/ sw.js README.md docs/*.md",
     "test": "node --test tests/*.test.js",
     "validate": "npm run lint && npm test && npm run format:check",
     "build": "npm run validate"

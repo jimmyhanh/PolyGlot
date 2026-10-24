@@ -51,7 +51,7 @@ The old cache-first service worker is retired by `sw.js`. If a previous installa
 - **Persona + Few-shot examples** on every request. **Iterative refinement** when you click Refine translation, with the previous draft available for comparison.
 - Structured translation, detected-language code and brief notes in one API call.
 - Optional live translation after a one-second pause. This is request-based translation, not continuous audio streaming.
-- Voice input where browser speech recognition is available. Select the spoken language before pressing Speak.
+- Voice input where browser speech recognition is available. Select the spoken language before pressing Speak. Listening continues across sentences until Stop, with automatic reconnection after ordinary browser session endings. New sentences append to existing text. Clear, changing the source language, loading another entry/example, swapping languages, playback, leaving the page, a microphone/network error or the 4,000-character limit also stops listening. Stop keeps finalized text and discards any unfinished phrase. Browser-imposed interruptions can cause brief gaps.
 - Listen where a matching system voice is installed, copy output, swap languages, and load history with its original settings.
 - Session-only history by default. Remember on this device is opt-in, holds up to 20 entries, and can be cleared.
 - Responsive layout, visible keyboard focus, field labels, status/error announcements and system dark mode.
@@ -68,12 +68,13 @@ Structured JSON improves application parsing, **not proof of translation accurac
 index.html + css/app.css + main.js
   ApiManager -> local /api/translate OR direct personal-session API call
   TranslationEngine -> cancellation and latest-request handling
+  ContinuousSpeech -> continuous capture, transcript appending and session recovery
   HistoryManager -> session storage policy and optional localStorage
   prompts.js -> validation, persona, examples, refinement, JSON contract
 server/app.js -> private API credentials, validation, rate limit, provider call
 ```
 
-The earlier `script.js`, `styles.css`, files in `original/`, and unused older controller/CSS modules remain as historical reference. The current entry point is `main.js`; it imports only the four modules listed above. `MODULAR-STRUCTURE.md` and `OPTIMIZATION-SUMMARY.md` describe the earlier implementation, not the current runtime.
+The earlier `script.js`, `styles.css`, files in `original/`, and unused older controller/CSS modules remain as historical reference. The current entry point is `main.js`; it imports only the five modules listed above. `MODULAR-STRUCTURE.md` and `OPTIMIZATION-SUMMARY.md` describe the earlier implementation, not the current runtime.
 
 ## Validation
 

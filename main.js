@@ -1,3 +1,4 @@
+import { ContinuousSpeech } from './js/ContinuousSpeech.js?v=3';
 import { ApiManager } from './js/ApiManager.js?v=2';
 import { TranslationEngine } from './js/TranslationEngine.js?v=2';
 import { HistoryManager } from './js/HistoryManager.js?v=2';
@@ -14,8 +15,7 @@ try {
 const history = new HistoryManager(storage);
 let timer,
     last = null,
-    busy = false,
-    recognizing = false;
+    busy = false;
 const status = text => {
     $('translation-status').textContent = text;
 };
@@ -127,6 +127,7 @@ function renderHistory() {
         preview.textContent = item.translation.slice(0, 120);
         button.append(preview);
         button.addEventListener('click', () => {
+            speech?.stop();
             invalidate();
             $('source-text').value = item.text;
             $('source-language').value = item.source;
@@ -150,7 +151,7 @@ $('live-translate').onchange = () => {
     if ($('live-translate').checked) changed();
 };
 $('clear-btn').onclick = () => {
-    recognition?.abort();
+    speech?.stop();
     invalidate();
     $('source-text').value = '';
     controls();
@@ -158,6 +159,7 @@ $('clear-btn').onclick = () => {
     $('source-text').focus();
 };
 $('swap-languages').onclick = () => {
+    speech?.stop();
     const from =
         $('source-language').value === 'auto' ? last?.detectedLanguage : $('source-language').value;
     if (!from || from === 'auto' || !Object.hasOwn(LANGUAGES, from) || !last)
@@ -189,6 +191,7 @@ $('clear-history').onclick = () => {
     renderHistory();
 };
 function example(text, target, context, tone) {
+    speech?.stop();
     invalidate();
     $('source-text').value = text;
     $('source-language').value = 'en';
@@ -239,43 +242,35 @@ const locale = {
     ko: 'ko-KR'
 };
 const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-let recognition = null;
+let speech = null;
 if (Recognition) {
-    recognition = new Recognition();
-    recognition.interimResults = false;
-    recognition.continuous = false;
-    recognition.onstart = () => {
-        recognizing = true;
-        $('voice-input').textContent = 'Stop';
-        $('voice-input').setAttribute('aria-pressed', 'true');
-        status('Listening…');
-    };
-    recognition.onend = () => {
-        recognizing = false;
-        $('voice-input').textContent = 'Speak';
-        $('voice-input').setAttribute('aria-pressed', 'false');
-    };
-    recognition.onresult = event => {
-        $('source-text').value = event.results[0][0].transcript.slice(0, 4000);
-        changed();
-    };
-    recognition.onerror = event => {
-        if (event.error !== 'aborted')
-            error(`Microphone: ${event.error}. Check permissions or type your text.`);
-    };
+    speech = new ContinuousSpeech({
+        Recognition,
+        getText: () => $('source-text').value,
+        setText: text => {
+            $('source-text').value = text;
+            changed();
+        },
+        onState: active => {
+            $('voice-input').textContent = active ? 'Stop' : 'Speak';
+            $('voice-input').setAttribute('aria-pressed', String(active));
+            $('voice-input').title = active ? 'Stop listening' : 'Listen until you press Stop';
+            status(active ? 'Listening until you press Stop…' : 'Listening stopped.');
+        },
+        onError: error
+    });
     $('voice-input').onclick = () => {
-        if (recognizing) return recognition.stop();
+        if (speech.active) return speech.stop();
         if ($('source-language').value === 'auto')
             return error(
                 'Choose the language you will speak first. Auto detect works for typed text.'
             );
-        recognition.lang = locale[$('source-language').value];
-        try {
-            recognition.start();
-        } catch {
-            error('Microphone is already starting. Please try again.');
-        }
+        error('');
+        window.speechSynthesis?.cancel();
+        speech.start(locale[$('source-language').value]);
     };
+    window.addEventListener('pagehide', () => speech.stop());
+    $('source-language').addEventListener('change', () => speech.stop());
 } else {
     $('voice-input').disabled = true;
     $('voice-input').title =
@@ -283,6 +278,7 @@ if (Recognition) {
 }
 $('play-target').onclick = () => {
     if (!last || !window.speechSynthesis) return;
+    speech?.stop();
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(last.translation);
     utterance.lang = locale[last.target];
